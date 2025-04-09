@@ -50,14 +50,30 @@ class Enemy : public Entity {
     }
 };
 
+class Boss : public Enemy {
+   private:
+    std::string specialAbility;
+
+   public:
+    Boss(const std::string& n, int h, const std::string& t, const std::string& s)
+        : Enemy(n, h, t), specialAbility(s) {}
+
+    void displayInfo() const override {
+        Enemy::displayInfo();
+        std::cout << "Special ability: " << specialAbility << std::endl;
+    }
+};
+
 int main() {
     // Создаем объекты игрока и врага
     Player hero("Hero", 100, 0);
     Enemy monster("Goblin", 50, "Goblin");
+    Boss dragon("Dragon", 9999, "Dragon", "Fire breath");
 
     // Выводим информацию о персонажах
     hero.displayInfo();
     monster.displayInfo();
+    dragon.displayInfo();
 
     return 0;
 }

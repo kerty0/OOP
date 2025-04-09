@@ -34,6 +34,24 @@ class Character {
             std::cout << name << " attacks " << enemy.name << ", but it has no effect!" << std::endl;
         }
     }
+
+    void heal(int amount) {
+        if (health + amount >= 100) {
+            health = 100;
+        } else {
+            health += amount;
+        }
+        std::cout << name << " now has " << health << " health!" << std::endl;
+    }
+
+    void takeDamage(int amount) {
+        if (amount >= health) {
+            health = 0;
+        } else {
+            health -= amount;
+        }
+        std::cout << name << " now has " << health << " health!" << std::endl;
+    }
 };
 
 int main() {
@@ -48,6 +66,12 @@ int main() {
     // Герой атакует монстра
     hero.attackEnemy(monster);
     monster.displayInfo();
+
+    hero.heal(10);
+    monster.heal(10);
+
+    monster.takeDamage(10);
+    monster.takeDamage(50);
 
     return 0;
 }

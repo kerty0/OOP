@@ -14,10 +14,18 @@ class GameManager {
         entities.push_back(entity);
     }
 
-    void displayAll() {
+    void displayAll() const {
         std::cout << "GameManager content:" << std::endl;
         for (int i = 0; i < entities.size(); i++) {
             entities[i]->displayInfo();
         }
+    }
+
+    std::string saveAll() const {
+        std::string state = std::to_string(entities.size()) + "\n";
+        for (int i = 0; i < entities.size(); i++) {
+            state += entities[i]->save() + "\n";
+        }
+        return state;
     }
 };

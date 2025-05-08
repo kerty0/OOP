@@ -12,8 +12,16 @@ class Entity {
         return health;
     }
 
+    void setHealth(int new_health) {
+        health = std::max(new_health, 0);
+    }
+
     virtual void displayInfo() const {
         std::cout << "Name: " << name << ", HP: " << health << std::endl;
+    }
+
+    virtual std::string save() const {
+        return "Entity " + name + " " + std::to_string(health);
     }
 
     virtual ~Entity() {}
@@ -31,6 +39,10 @@ class Player : public Entity {
         Entity::displayInfo();
         std::cout << "Experience: " << experience << std::endl;
     }
+
+    std::string save() const override {
+        return "Player " + name + " " + std::to_string(health) + " " + std::to_string(experience);
+    }
 };
 
 class Enemy : public Entity {
@@ -44,5 +56,9 @@ class Enemy : public Entity {
     void displayInfo() const override {
         Entity::displayInfo();
         std::cout << "Type: " << type << std::endl;
+    }
+
+    std::string save() const override {
+        return "Enemy " + name + " " + std::to_string(health) + " " + type;
     }
 };

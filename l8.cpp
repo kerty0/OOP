@@ -6,6 +6,7 @@ class Person {
     std::string name;
     int age;
     std::string email;
+    std::string address;
 
    public:
     // Геттеры
@@ -19,6 +20,10 @@ class Person {
 
     std::string getEmail() const {
         return email;
+    }
+
+    std::string getAddress() const {
+        return address;
     }
 
     // Сеттеры
@@ -46,9 +51,17 @@ class Person {
         }
     }
 
+    void setAddress(const std::string& newAddress) {
+        if (!newAddress.empty()) {
+            address = newAddress;
+        } else {
+            std::cerr << "Error: Address cannot be empty!" << std::endl;
+        }
+    }
+
     // Метод для вывода информации о человеке
     void displayInfo() const {
-        std::cout << "Name: " << name << ", Age: " << age << ", Email: " << email << std::endl;
+        std::cout << "Name: " << name << ", Age: " << age << ", Email: " << email << ", Address: " << address << std::endl;
     }
 };
 
@@ -59,16 +72,19 @@ int main() {
     person.setName("John Doe");
     person.setAge(25);
     person.setEmail("john.doe@example.com");
+    person.setAddress("Moscow");
 
     // Выводим информацию с помощью геттеров
     std::cout << "Name: " << person.getName() << std::endl;
     std::cout << "Age: " << person.getAge() << std::endl;
     std::cout << "Email: " << person.getEmail() << std::endl;
+    std::cout << "Address: " << person.getAddress() << std::endl;
 
     // Пытаемся установить некорректные значения
     person.setName("");                // Ошибка: имя не может быть пустым
     person.setAge(150);                // Ошибка: возраст должен быть от 0 до 120
     person.setEmail("invalid-email");  // Ошибка: некорректный email
+    person.setAddress("");             // Ошибка: адрес не может быть пустым
 
     // Выводим информацию о человеке
     person.displayInfo();
